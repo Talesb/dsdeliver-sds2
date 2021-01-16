@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.talesb.devsuperior.dsdeliver.dto.ProductDTO;
+
 @Entity
 @Table(name = "tb_product")
 public class Product implements Serializable {
@@ -35,6 +37,14 @@ public class Product implements Serializable {
 		this.price = price;
 		this.description = description;
 		this.imageUri = imageUri;
+	}
+
+	public Product(ProductDTO productDTO) {
+		this.id = productDTO.getId();
+		this.name = productDTO.getName();
+		this.price = productDTO.getPrice();
+		this.description = productDTO.getDescription();
+		this.imageUri = productDTO.getImageUri();
 	}
 
 	public Long getId() {

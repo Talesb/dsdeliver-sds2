@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.talesb.devsuperior.dsdeliver.dto.OrderDTO;
+
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
@@ -52,6 +54,17 @@ public class Order implements Serializable {
 		this.longitude = longitude;
 		this.moment = moment;
 		this.status = status;
+	}
+	
+	
+
+	public Order(OrderDTO orderDTO) {
+		 this.id= orderDTO.getId();
+		 this.address = orderDTO.getAddress();
+		 this.latitude = orderDTO.getLatitude();
+		 this.longitude = orderDTO.getLongitude();
+		 this.moment = Instant.now();
+		 this.status = OrderStatus.PENDING;		 
 	}
 
 	public Long getId() {
