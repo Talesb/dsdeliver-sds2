@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,10 +38,7 @@ public class Order implements Serializable {
 
 	// Não permite repetição de produtos
 	@ManyToMany
-	@JoinTable(
-			name="tb_order_product",
-			joinColumns = @JoinColumn(name="order_id"),
-			inverseJoinColumns = @JoinColumn(name="product_id"))
+	@JoinTable(name = "tb_order_product", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
 	private Set<Product> products = new HashSet<Product>();
 
 	public Order() {
@@ -55,16 +54,14 @@ public class Order implements Serializable {
 		this.moment = moment;
 		this.status = status;
 	}
-	
-	
 
 	public Order(OrderDTO orderDTO) {
-		 this.id= orderDTO.getId();
-		 this.address = orderDTO.getAddress();
-		 this.latitude = orderDTO.getLatitude();
-		 this.longitude = orderDTO.getLongitude();
-		 this.moment = Instant.now();
-		 this.status = OrderStatus.PENDING;		 
+		this.id = orderDTO.getId();
+		this.address = orderDTO.getAddress();
+		this.latitude = orderDTO.getLatitude();
+		this.longitude = orderDTO.getLongitude();
+		this.moment = Instant.now();
+		this.status = OrderStatus.PENDING;
 	}
 
 	public Long getId() {
@@ -113,6 +110,19 @@ public class Order implements Serializable {
 
 	public void setStatus(OrderStatus status) {
 		this.status = status;
+	}
+
+	public Double getTotal() {
+
+		AtomicReference<Double> sum = new AtomicReference<Double>(0.);
+
+		if (this.products != null) {
+			this.products.stream().forEach(product -> {
+				sum.set(sum.get() + product.getPrice());
+			});
+		}
+
+		return sum.get();
 	}
 
 	public Set<Product> getProducts() {

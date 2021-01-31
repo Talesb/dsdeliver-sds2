@@ -34,12 +34,6 @@ public class OrderService {
 	public OrderDTO insert(OrderDTO orderDTO) {
 		Order order = new Order(orderDTO);
 
-//		order.getProducts().stream()
-//		.forEach(p -> {
-//			Product product = productRepository.getOne(p.getId());
-//			order.getProducts().add(product);
-//		});
-//		
 		for (ProductDTO p : orderDTO.getProducts()) {
 			Product product = productRepository.getOne(p.getId());
 			order.getProducts().add(product);
