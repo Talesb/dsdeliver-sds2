@@ -1,0 +1,7 @@
+### Typescript ###
+
+Diferenças entre type e class/interface
+https://stackoverflow.com/questions/51131898/what-is-the-difference-between-type-and-class-in-typescript/51132333
+https://qastack.com.br/programming/36782896/in-typescript-what-is-the-difference-between-type-and-interface#:~:text=Tipos%20%C3%A9%20mais%20ou%20menos,ser%20implementados%20por%20uma%20classe.&text=quando%20Type%20%C3%A9%20implementado%20por,Interface%20elas%20devem%20ser%20declaradas.
+
+Diferenças entre interfaces e classes
