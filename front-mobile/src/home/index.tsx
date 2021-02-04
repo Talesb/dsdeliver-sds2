@@ -72,4 +72,3 @@ const styles = StyleSheet.create(
         }
     }
 );
-//Parei em 52:42

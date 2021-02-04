@@ -40,4 +40,3 @@ const styles = StyleSheet.create({
     }
 });
 
-// Parei em 38:40
